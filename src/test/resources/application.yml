@@ -1,0 +1,49 @@
+spring:
+  profiles: default
+  batch:
+    job:
+      names: ${job.name:NONE}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+#        generate_statistics: true
+        jdbc.batch_size: 100
+        order_inserts: true
+        order_updates: true
+
+  datasource:
+    main:
+      hikari:
+#        jdbc-url: jdbc:h2:mem:main;MODE=MYSQL
+        jdbc-url: jdbc:h2:tcp://localhost/~/test;MODE=MYSQL  # h2 서버 띄워야 함.
+        username: sa
+        password:
+        maximum-pool-size: 5
+        minimum-idle: 1
+        driver-class-name: org.h2.Driver
+#    sub:
+#      hikari:
+#        jdbc-url: jdbc:h2:mem:sub
+#        username: sa
+#        password:
+#        maximum-pool-size: 5
+#        minimum-idle: 1
+#        driver-class-name: org.h2.Driver
+    sub:
+      hikari:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/training?serverTimezone=Asia/Seoul
+        username: root
+        password: 1234
+        maximum-pool-size: 5
+        minimum-idle: 1
+        driver-class-name: com.mysql.jdbc.Driver
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
