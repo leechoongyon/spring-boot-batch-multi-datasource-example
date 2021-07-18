@@ -25,10 +25,8 @@ public class MultiDataSourceJobIntegrationTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void 멀티데이터소스_통합_테스트() throws Exception {
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
-        Assert.assertThat(jobExecution.getStatus(),  is(BatchStatus.COMPLETED));
-        Assert.assertThat(jobExecution.getExitStatus(),  is(ExitStatus.COMPLETED));
     }
 }
