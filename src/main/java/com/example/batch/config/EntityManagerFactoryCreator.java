@@ -72,6 +72,19 @@ public class EntityManagerFactoryCreator {
         }
     }
 
+    /**
+     * dataSource 의 AutoCommit 이 false 여야 hibernate.connection.provider_disables_autocommit 옵션을 킬 수 있다.
+     * hibernate.connection.provider_disables_autocommit 옵션을 키면 setAutoCommit, getAutoCommit 을 수행안하기에
+     * 성능 향상을 기대할 수 있다. setAutoCommit 의 경우 트랜잭션 begin 과 동일하며, 매번 수행할 때마다 connection 을 가져오게 돼있음.
+     *
+     * 만약, hibernate.connection.provider_disables_autocommit 옵션을 true 했는데 hikari 의 autoCommit true 이면
+     * autoCommit 으로 처리돼기에 조심해야 함.
+     *
+     * application.yml 에서 hikari 의 autoCommit 을 false 로 하면 아래 isDataSource AutoCommitDisabled 에서
+     * true 를 리턴해 hibernate.connection.provider_disables_autocommit 옵션이 적용됨.
+     *
+     * @param vendorProperties
+     */
     private void configureProviderDisablesAutocommit(Map<String, Object> vendorProperties) {
         if (isDataSourceAutoCommitDisabled()) {
             log.info("Hikari auto-commit: false");

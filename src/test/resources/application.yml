@@ -19,6 +19,7 @@ spring:
   datasource:
     main:
       hikari:
+        auto-commit: false
 #        jdbc-url: jdbc:h2:mem:main;MODE=MYSQL
         jdbc-url: jdbc:h2:tcp://localhost/~/test;MODE=MYSQL  # h2 서버 띄워야 함.
         username: sa
@@ -36,6 +37,7 @@ spring:
 #        driver-class-name: org.h2.Driver
     sub:
       hikari:
+        auto-commit: false
         jdbc-url: jdbc:mysql://127.0.0.1:3306/training?serverTimezone=Asia/Seoul
         username: root
         password: 1234
