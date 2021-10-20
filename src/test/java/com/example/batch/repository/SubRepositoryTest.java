@@ -17,6 +17,10 @@ public class SubRepositoryTest {
     @Autowired
     private SubRepository subRepository;
 
+    /**
+     * 테스트를 위해 MYSQL 과 H2 서버 띄워야 함
+     * @throws Exception
+     */
     @Test
     @Transactional
     public void save_테스트() throws Exception {

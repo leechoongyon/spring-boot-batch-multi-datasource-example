@@ -25,6 +25,10 @@ public class MultiDataSourceJobIntegrationTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
+    /**
+     * 테스트를 위해 MYSQL 과 H2 서버 띄워야 함
+     * @throws Exception
+     */
     @Test(expected = RuntimeException.class)
     public void 멀티데이터소스_통합_테스트() throws Exception {
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
